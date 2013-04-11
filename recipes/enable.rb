@@ -29,7 +29,7 @@ else
 end
 
 node['stormforwarder']['monitors'].each do |config_hash|
-  monitor_params = config_hash.map{|k,v| "-#{k} #{v}"}
+  monitor_params = config_hash.map{|k,v| "-#{k} #{v}"}.join(" ")
   monitor_exists = "/opt/splunkforwarder/bin/splunk list monitor | sed -e 's/^[ \t]*//' | grep '^#{config_hash['source']}$'"
 
   execute "update monitor for #{config_hash['source']}" do
